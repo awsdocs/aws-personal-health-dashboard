@@ -44,9 +44,9 @@ DescribeEventsRequest request = new DescribeEventsRequest();
 
 EventFilter filter = new EventFilter();
 // Filter on any field from the supported AWS Health EventFilter model. 
-// Here is an example for region us-west-1 events from the EC2 service.
+// Here is an example for region us-east-1 events from the EC2 service.
 filter.setServices(singletonList("EC2");
-filter.setRegions(singletonList("us-west-1"));
+filter.setRegions(singletonList("us-east-1"));
 request.setFilter(filter);
 
 DescribeEventsResult response = awsHealthClient.describeEvents(request);
@@ -78,7 +78,7 @@ request.setAggregateField("eventTypeCategory");
 
 // filter more on result if needed
 EventFilter filter = new EventFilter();
-filter.setRegions(singleton("us-west-1"));
+filter.setRegions(singleton("us-east-1"));
 request.setFilter(filter);
 
 DescribeEventAggregatesResult response = awsHealthClient.describeEventAggregates(request);
@@ -101,7 +101,7 @@ import com.amazonaws.services.health.model.EventDetails;
 
 DescribeEventDetailsRequest describeEventDetailsRequest = new DescribeEventDetailsRequest();
 // set event ARN and local value
-describeEventDetailsRequest.setEventArns(singletonList("arn:aws:health:us-west-1::event/eventId"));
+describeEventDetailsRequest.setEventArns(singletonList("arn:aws:health:us-east-1::event/eventId"));
 describeEventDetailsRequest.setLocale("en-US");
 
 DescribeEventDetailsResult describeEventDetailsResult = awsHealthClient.describeEventDetails(request);
@@ -129,7 +129,7 @@ import com.amazonaws.services.health.model.DescribeAffectedEntitiesResult;
 
 DescribeAffectedEntitiesRequest request = new DescribeAffectedEntitiesRequest();
 EntityFilter filter = new EntityFilter();
-filter.setEventArns(singletonList("arn:aws:health:us-west-1::event/eventId"));
+filter.setEventArns(singletonList("arn:aws:health:us-east-1::event/eventId"));
 
 DescribeAffectedEntitiesResult response = awsHealthClient.describeAffectedEntities(request);
 
@@ -148,7 +148,7 @@ import com.amazonaws.services.health.model.DescribeEntityAggregatesResult;
 import com.amazonaws.services.health.model.EntityAggregate;
 
 DescribeEntityAggregatesRequest request = new DescribeEntityAggregatesRequest();
-request.setEventArns(singletonList("arn:aws:health:us-west-1::event/eventId"));
+request.setEventArns(singletonList("arn:aws:health:us-east-1::event/eventId"));
 
 DescribeEntityAggregatesResult response = awsHealthClient.describeEntityAggregates(request);
 

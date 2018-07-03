@@ -21,7 +21,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Getting Started with the AWS Personal Health Dashboard](getting-started-phd.md)
 + [Getting Started with the AWS Health API](getting-started-api.md)
    + [Sample Java Code for the AWS Health API](code-sample-java.md)
-+ [Controlling Access to AWS Personal Health Dashboard and AWS Health](controlling-access.md)
++ [Controlling Access to the AWS Personal Health Dashboard and AWS Health](controlling-access.md)
 + [Monitoring AWS Health Events with Amazon CloudWatch Events](cloudwatch-events-health.md)
 + [Logging AWS Health API Calls with AWS CloudTrail](logging-using-cloudtrail.md)
 + [Document History for AWS Health](doc-history.md)

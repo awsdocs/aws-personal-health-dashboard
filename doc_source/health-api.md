@@ -5,7 +5,7 @@ AWS Health is a RESTful web service that uses HTTPS as a transport and JavaScrip
 **Note**  
 You must have a [Business or Enterprise support plan](https://aws.amazon.com/premiumsupport/compare-plans/) to use the AWS Health API\.
 
- Alternatively, you can simplify application development by using the AWS SDKs that wrap the AWS Health REST API calls\. You provide your credentials, and these libraries take care of authentication and request signing\. 
+ You can simplify application development by using the AWS SDKs that wrap the AWS Health REST API calls\. You provide your credentials, and these libraries take care of authentication and request signing\. 
 
 AWS Health also provides a [Personal Health Dashboard](https://phd.aws.amazon.com/phd/home#/) in the AWS Management Console that is available to all AWS customers\. You can use the Personal Health Dashboard to view and search for events and affected entities\.
 
@@ -13,7 +13,7 @@ AWS Health also provides a [Personal Health Dashboard](https://phd.aws.amazon.co
 
 AWS Health has a single global endpoint: https://health\.us\-east\-1\.amazonaws\.com
 
-You can view events in specific AWS regions by using the filters supported by the API\. For more information about AWS endpoints and regions for all services, see [AWS Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\.
+You can view events in specific AWS Regions by using the filters supported by the API\. For more information about AWS endpoints and Regions for all services, see [AWS Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\.
 
 ## Signing AWS Health API Requests<a name="signing"></a>
 
