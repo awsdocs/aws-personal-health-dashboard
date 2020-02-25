@@ -6,7 +6,7 @@ The following Java code examples demonstrate how to initialize an AWS Health cli
 
 Valid credentials are required to communicate with the AWS Health API\. You can use the key pair of any IAM user associated with the AWS account\.
 
-Create and initialize an [AWSCredentials](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/AWSCredentials.html) instance:
+Create and initialize an [AWSCredentials](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/AWSCredentials.html) instance:
 
 ```
 AWSCredentials credentials = null;
@@ -44,7 +44,7 @@ DescribeEventsRequest request = new DescribeEventsRequest();
 
 EventFilter filter = new EventFilter();
 // Filter on any field from the supported AWS Health EventFilter model. 
-// Here is an example for region us-east-1 events from the EC2 service.
+// Here is an example for Region us-east-1 events from the EC2 service.
 filter.setServices(singletonList("EC2");
 filter.setRegions(singletonList("us-east-1"));
 request.setFilter(filter);
@@ -101,9 +101,10 @@ import com.amazonaws.services.health.model.EventDetails;
 
 DescribeEventDetailsRequest describeEventDetailsRequest = new DescribeEventDetailsRequest();
 // set event ARN and local value
-describeEventDetailsRequest.setEventArns(singletonList("arn:aws:health:us-east-1::event/eventId"));
-describeEventDetailsRequest.setLocale("en-US");
 
+describeEventDetailsRequest.setEventArns(singletonList("arn:aws:health:us-east-1::event/service/eventTypeCode/eventId"));
+describeEventDetailsRequest.setLocale("en-US");
+filter.setEventArns
 DescribeEventDetailsResult describeEventDetailsResult = awsHealthClient.describeEventDetails(request);
 EventDetails eventDetail = describeEventDetailsResult.getSuccessfulSet().get(0);
 
@@ -125,11 +126,12 @@ System.out.println(eventDetail.getEventDescription().getLatestDescription());
 import com.amazonaws.services.health.model.AffectedEntity;
 import com.amazonaws.services.health.model.DateTimeRange;
 import com.amazonaws.services.health.model.DescribeAffectedEntitiesRequest;
-import com.amazonaws.services.health.model.DescribeAffectedEntitiesResult;
+import com.amdescribeEventDetailsRequestazonaws.services.health.model.DescribeAffectedEntitiesResult;
 
 DescribeAffectedEntitiesRequest request = new DescribeAffectedEntitiesRequest();
 EntityFilter filter = new EntityFilter();
-filter.setEventArns(singletonList("arn:aws:health:us-east-1::event/eventId"));
+
+filter.setEventArns(singletonList("arn:aws:health:us-east-1::event/service/eventTypeCode/eventId"));
 
 DescribeAffectedEntitiesResult response = awsHealthClient.describeAffectedEntities(request);
 
@@ -148,7 +150,8 @@ import com.amazonaws.services.health.model.DescribeEntityAggregatesResult;
 import com.amazonaws.services.health.model.EntityAggregate;
 
 DescribeEntityAggregatesRequest request = new DescribeEntityAggregatesRequest();
-request.setEventArns(singletonList("arn:aws:health:us-east-1::event/eventId"));
+
+request.setEventArns(singletonList("arn:aws:health:us-east-1::event/service/eventTypeCode/eventId"));
 
 DescribeEntityAggregatesResult response = awsHealthClient.describeEntityAggregates(request);
 

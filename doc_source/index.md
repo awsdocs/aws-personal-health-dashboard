@@ -1,7 +1,7 @@
 # AWS Health User Guide
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -24,5 +24,6 @@ Amazon's trademarks and trade dress may not be used in
 + [Controlling Access to the AWS Personal Health Dashboard and AWS Health](controlling-access.md)
 + [Monitoring AWS Health Events with Amazon CloudWatch Events](cloudwatch-events-health.md)
 + [Logging AWS Health API Calls with AWS CloudTrail](logging-using-cloudtrail.md)
++ [Aggregating AWS Health Events across Accounts with Organizational View](aggregate-events.md)
 + [Document History for AWS Health](doc-history.md)
 + [AWS Glossary](glossary.md)

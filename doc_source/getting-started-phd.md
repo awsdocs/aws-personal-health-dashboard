@@ -16,7 +16,7 @@ To be notified or take an automatic action when events change, you can set up ru
 
 ## Event Log<a name="event-log"></a>
 
-The Event log page of the Personal Health Dashboard displays all the AWS Health events that apply to your account\. The column layout and behavior is similar to the Dashboard, but the log page includes additional columns and filter options for **Status** and **Event category**\. 
+The Event log page of the Personal Health Dashboard displays all the AWS Health events that apply to your account\. The column layout and behavior is similar to the Dashboard, but the log page includes additional columns and filter options for **Status** and **Event category**\.
 
 When you select an event in the Event log list, the Event Details pane appears with information about the event and resources that are affected by the event\. For more information, see [Event Details Pane](#event-details)\.
 
@@ -31,4 +31,4 @@ You can filter the items that appear in the resources list by choosing options f
 
 ## Alerts for AWS Health Events<a name="alert-bell"></a>
 
-The Personal Health Dashboard includes a bell icon in the console navigation bar with an Alerts drop\-down menu which can display the number of recent AWS Health events that appear on the dashboard in each category\. This bell icon appears on several AWS consoles, including Amazon EC2, Amazon RDS, IAM, and AWS Trusted Advisor\. You can use this feature to see at a glance whether your account is affected by any recent events, and you can choose one of the menu items to go directly to the Personal Health Dashboard for more information\.
+The Personal Health Dashboard includes a bell icon in the console navigation bar with an Alerts drop\-down menu, which can display the number of recent AWS Health events that appear on the dashboard in each category\. This bell icon appears on several AWS consoles, including Amazon EC2, Amazon RDS, IAM, and AWS Trusted Advisor\. You can use this feature to see at a glance whether your account is affected by any recent events, and you can choose one of the menu items to go directly to the Personal Health Dashboard for more information\.
