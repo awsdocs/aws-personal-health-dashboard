@@ -13,7 +13,7 @@ Before you start using the Organizational View APIs, you must:
 To enable AWS Health to work with AWS Organizations, you call the [EnableHealthServiceAccessForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html) API\. When you enable this feature, a [Service\-Linked Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html) \(SLR\) is applied to the master account in the organization 
 
 **Note**  
-Enabling this feature is an asynchronous process, and takes time to complete\. You can call the [DescribeHealthServiceStatusForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DisableHealthServiceAccessForOrganization.html) operation to see the status of the process\.
+Enabling this feature is an asynchronous process, and takes time to complete\. You can call the [DescribeHealthServiceStatusForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeHealthServiceStatusForOrganization.html) operation to see the status of the process\.
 
 When you enable this feature, events that affect accounts in the organization begin accruing in the Organizational View from that point forward\. After 90 days, events are purged from the Organizational View\.
 
