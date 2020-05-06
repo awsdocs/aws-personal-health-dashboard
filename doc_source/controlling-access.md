@@ -1,250 +1,96 @@
-# Controlling Access to the AWS Personal Health Dashboard and AWS Health<a name="controlling-access"></a>
+# Identity and access management for AWS Health<a name="controlling-access"></a>
 
-You can use IAM to create identities \(users, groups, or roles\), and then give those identities permissions to access the Personal Health Dashboard and AWS Health API\.
+AWS Identity and Access Management \(IAM\) is an AWS service that helps an administrator securely control access to AWS resources\. IAM administrators control who can be *authenticated* \(signed in\) and *authorized* \(have permissions\) to use AWS Health resources\. IAM is an AWS service that you can use with no additional charge\.
 
-By default, IAM users do not have access to the Personal Health Dashboard or AWS Health\. You give users access to your account's AWS Health information by attaching IAM policies to a single user, a group of users, or a role\. For more information, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) and [Overview of IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html)\.
+**Topics**
++ [Audience](#security_iam_audience)
++ [Authenticating with identities](#security_iam_authentication)
++ [Managing access using policies](#security_iam_access-manage)
++ [How AWS Health works with IAM](security_iam_service-with-iam.md)
++ [AWS Health identity\-based policy examples](security_iam_id-based-policy-examples.md)
++ [Troubleshooting AWS Health identity and access](security_iam_troubleshoot.md)
++ [Using service\-linked roles for AWS Health](using-service-linked-roles.md)
 
-After you create IAM users, you can give those users individual passwords\. Then, they can sign in to your account and view AWS Health information by using an account\-specific sign\-in page\. For more information, see [How Users Sign In to Your Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html)\.
+## Audience<a name="security_iam_audience"></a>
 
-**Important**  
-An IAM user with permissions to view Personal Health Dashboard has read\-only access to health information across all AWS services on the account, which can include, but is not limited to, AWS resource IDs such as Amazon EC2 instance IDs, EC2 instance IP addresses, and general security notifications\. For example, if an IAM policy grants access only to Personal Health Dashboard and AWS Health API, then the user or role that the policy applies to can access all information posted about AWS services and related resources, even if other IAM policies do not allow that access\.
+How you use AWS Identity and Access Management \(IAM\) differs, depending on the work you do in AWS Health\.
 
-AWS Health offers two groups of APIs:
-+ Individual Account
-  + [DescribeEvents](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html)
-  + [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html)
-  + [DescribeAffectedEntities](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html)
-  + [DescribeEventTypes](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html)
-  + [DescribeEventAggregates](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html)
-  + [DescribeEntityAggregates](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEntityAggregates.html)
-+ Organizational
-  + [DescribeEventsForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html)
-  + [DescribeAffectedAccountsForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedAccountsForOrganization.html)
-  + [DescribeEventDetailsForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
-  + [DescribeAffectedEntitiesForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
-  + [EnableHealthServiceAccessForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
-  + [DisableHealthServiceAccessForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DisableHealthServiceAccessForOrganization.html)
-  + [DescribeHealthServiceStatusForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeHealthServiceStatusForOrganization.html)
+**Service user** – If you use the AWS Health service to do your job, then your administrator provides you with the credentials and permissions that you need\. As you use more AWS Health features to do your work, you might need additional permissions\. Understanding how access is managed can help you request the right permissions from your administrator\. If you cannot access a feature in AWS Health, see [Troubleshooting AWS Health identity and access](security_iam_troubleshoot.md)\.
 
-**Note**  
-Although the Personal Health Dashboard is available for all AWS accounts, the AWS Health API is available only to accounts with a Business or Enterprise support plan\. For more information see [AWS Support](https://aws.amazon.com/premiumsupport/)\.
+**Service administrator** – If you're in charge of AWS Health resources at your company, you probably have full access to AWS Health\. It's your job to determine which AWS Health features and resources your employees should access\. You must then submit requests to your IAM administrator to change the permissions of your service users\. Review the information on this page to understand the basic concepts of IAM\. To learn more about how your company can use IAM with AWS Health, see [How AWS Health works with IAM](security_iam_service-with-iam.md)\.
 
-## Individual Actions<a name="individual-actions"></a>
+**IAM administrator** – If you're an IAM administrator, you might want to learn details about how you can write policies to manage access to AWS Health\. To view example AWS Health identity\-based policies that you can use in IAM, see [AWS Health identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
 
-To allow access to the Personal Health Dashboard and AWS Health, set the `Action` element of an IAM policy to `health:Describe*`\. AWS Health supports access control to Events based on the `eventTypeCode` and service\. See [Resource\- and Action\-based Conditions](#resource-action-based-conditions)\. To allow access to all events, set the `Resource` element to `*`\.
+## Authenticating with identities<a name="security_iam_authentication"></a>
 
-**Note**  
-Although the Personal Health Dashboard is available for all AWS accounts, the AWS Health API is available only to accounts with a Business or Enterprise support plan\. For more information, see [AWS Support](https://aws.amazon.com/premiumsupport/)\.
+Authentication is how you sign in to AWS using your identity credentials\. For more information about signing in using the AWS Management Console, see [The IAM Console and Sign\-in Page](https://docs.aws.amazon.com/IAM/latest/UserGuide/console.html) in the *IAM User Guide*\.
 
-For example, this policy statement grants access to Personal Health Dashboard and AWS Health:
+You must be *authenticated* \(signed in to AWS\) as the AWS account root user, an IAM user, or by assuming an IAM role\. You can also use your company's single sign\-on authentication, or even sign in using Google or Facebook\. In these cases, your administrator previously set up identity federation using IAM roles\. When you access AWS using credentials from another company, you are assuming a role indirectly\. 
 
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-  {
-    "Effect": "Allow",
-    "Action": [
-      "health:Describe*"
-    ],
-    "Resource": "*"
-  }]
-}
-```
+To sign in directly to the [AWS Management Console](https://console.aws.amazon.com/), use your password with your root user email or your IAM user name\. You can access AWS programmatically using your root user or IAM user access keys\. AWS provides SDK and command line tools to cryptographically sign your request using your credentials\. If you don’t use AWS tools, you must sign the request yourself\. Do this using *Signature Version 4*, a protocol for authenticating inbound API requests\. For more information about authenticating requests, see [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *AWS General Reference*\.
 
-This policy statement denies access to Personal Health Dashboard and AWS Health:
+Regardless of the authentication method that you use, you might also be required to provide additional security information\. For example, AWS recommends that you use multi\-factor authentication \(MFA\) to increase the security of your account\. To learn more, see [Using Multi\-Factor Authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
 
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-  {
-    "Effect": "Deny",
-    "Action": [
-      "health:*"
-    ],
-    "Resource": "*"
-  }]
-}
-```
+### AWS account root user<a name="security_iam_authentication-rootuser"></a>
 
-If the user or group that you want to give permissions to already has a policy, you can add the AWS Health\-specific policy statement illustrated here to that policy\.
+  When you first create an AWS account, you begin with a single sign\-in identity that has complete access to all AWS services and resources in the account\. This identity is called the AWS account *root user* and is accessed by signing in with the email address and password that you used to create the account\. We strongly recommend that you do not use the root user for your everyday tasks, even the administrative ones\. Instead, adhere to the [best practice of using the root user only to create your first IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users)\. Then securely lock away the root user credentials and use them to perform only a few account and service management tasks\. 
 
-## Organizational View<a name="organizational-view"></a>
+### IAM users and groups<a name="security_iam_authentication-iamuser"></a>
 
- To allow access to the Organizational AWS Health APIs set the `Action` element of an IAM policy to also include the following:
-+ `iam:CreateServiceLinkedRole`
-+ `organizations:EnableAWSServiceAccess`
-+ `organizations:DisableAWSServiceAccess`
-+ `organizations:ListAccounts`
+An *[IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)* is an identity within your AWS account that has specific permissions for a single person or application\. An IAM user can have long\-term credentials such as a user name and password or a set of access keys\. To learn how to generate access keys, see [Managing Access Keys for IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) in the *IAM User Guide*\. When you generate access keys for an IAM user, make sure you view and securely save the key pair\. You cannot recover the secret access key in the future\. Instead, you must generate a new access key pair\.
 
-To understand the exact permission need per APIs, see the IAM service page for [AWS Health](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awshealthapisandnotifications.html#awshealthapisandnotifications-actions-as-permissions)\.
+An [https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html) is an identity that specifies a collection of IAM users\. You can't sign in as a group\. You can use groups to specify permissions for multiple users at a time\. Groups make permissions easier to manage for large sets of users\. For example, you could have a group named *IAMAdmins* and give that group permissions to administer IAM resources\.
 
-**Note**  
-Only the credential of the master account for an organization can access these APIs\.  
-For example, this policy statement grants access to all AWS Health Organizational APIs:
+Users are different from roles\. A user is uniquely associated with one person or application, but a role is intended to be assumable by anyone who needs it\. Users have permanent long\-term credentials, but roles provide temporary credentials\. To learn more, see [When to Create an IAM User \(Instead of a Role\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html#id_which-to-choose) in the *IAM User Guide*\.
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "organizations:EnableAWSServiceAccess",
-                "organizations:DisableAWSServiceAccess"
-            ],
-            "Resource": "*",
-            "Condition": {
-                "StringEquals": {
-                    "organizations:ServicePrincipal": "health.amazonaws.com"
-                }
-            }
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "health:*",
-                "organizations:ListAccounts"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": "iam:CreateServiceLinkedRole",
-            "Resource": "arn:aws:iam::*:role/aws-service-role/health.amazonaws.com/AWSServiceRoleForHealth*"
-        }
-    ]
-}
-```
+### IAM roles<a name="security_iam_authentication-iamrole"></a>
 
-This policy statement explicitly denies access to Organizational APIs but allows access to Account APIs:
+An *[IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)* is an identity within your AWS account that has specific permissions\. It is similar to an IAM user, but is not associated with a specific person\. You can temporarily assume an IAM role in the AWS Management Console by [switching roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html)\. You can assume a role by calling an AWS CLI or AWS API operation or by using a custom URL\. For more information about methods for using roles, see [Using IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the *IAM User Guide*\.
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "health:*"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Deny",
-            "Action": [
-                "organizations:EnableAWSServiceAccess",
-                "organizations:DisableAWSServiceAccess"
-            ],
-            "Resource": "*",
-            "Condition": {
-                "StringEquals": {
-                    "organizations:ServicePrincipal": "health.amazonaws.com"
-                }
-            }
-        },
-        {
-            "Effect": "Deny",
-            "Action": [
-                "organizations:ListAccounts"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Deny",
-            "Action": "iam:CreateServiceLinkedRole",
-            "Resource": "arn:aws:iam::*:role/aws-service-role/health.amazonaws.com/AWSServiceRoleForHealth*"
-        }
-    ]
-}
-```
+IAM roles with temporary credentials are useful in the following situations:
++ **Temporary IAM user permissions** – An IAM user can assume an IAM role to temporarily take on different permissions for a specific task\. 
++ **Federated user access** –  Instead of creating an IAM user, you can use existing identities from AWS Directory Service, your enterprise user directory, or a web identity provider\. These are known as *federated users*\. AWS assigns a role to a federated user when access is requested through an [identity provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html)\. For more information about federated users, see [Federated Users and Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_access-management.html#intro-access-roles) in the *IAM User Guide*\. 
++ **Cross\-account access** – You can use an IAM role to allow someone \(a trusted principal\) in a different account to access resources in your account\. Roles are the primary way to grant cross\-account access\. However, with some AWS services, you can attach a policy directly to a resource \(instead of using a role as a proxy\)\. To learn the difference between roles and resource\-based policies for cross\-account access, see [How IAM Roles Differ from Resource\-based Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\.
++ **AWS service access** –  A service role is an IAM role that a service assumes to perform actions in your account on your behalf\. When you set up some AWS service environments, you must define a role for the service to assume\. This service role must include all the permissions that are required for the service to access the AWS resources that it needs\. Service roles vary from service to service, but many allow you to choose your permissions as long as you meet the documented requirements for that service\. Service roles provide access only within your account and cannot be used to grant access to services in other accounts\. You can create, modify, and delete a service role from within IAM\. For example, you can create a role that allows Amazon Redshift to access an Amazon S3 bucket on your behalf and then load data from that bucket into an Amazon Redshift cluster\. For more information, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\. 
++ **Applications running on Amazon EC2** –  You can use an IAM role to manage temporary credentials for applications that are running on an EC2 instance and making AWS CLI or AWS API requests\. This is preferable to storing access keys within the EC2 instance\. To assign an AWS role to an EC2 instance and make it available to all of its applications, you create an instance profile that is attached to the instance\. An instance profile contains the role and enables programs that are running on the EC2 instance to get temporary credentials\. For more information, see [Using an IAM Role to Grant Permissions to Applications Running on Amazon EC2 Instances](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) in the *IAM User Guide*\. 
 
-## Resource\- and Action\-based Conditions<a name="resource-action-based-conditions"></a>
+To learn whether to use IAM roles, see [When to Create an IAM Role \(Instead of a User\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html#id_which-to-choose_role) in the *IAM User Guide*\.
 
-AWS Health supports [IAM conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) for [ `DescribeAffectedEntities`](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html) and [https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html)\. This allows you to restrict Events vended by AWS Health API on a per user, group, or role basis\. You can achieve this by populating the conditions block of the IAM Policy or by setting the `Resource` element\. You can use [String Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String) to restrict access based on certain Health Event fields\. The following fields are supported:
-+ `eventTypeCode`
-+ `service`
+## Managing access using policies<a name="security_iam_access-manage"></a>
 
-For example, this policy statement grants access to Personal Health Dashboard and AWS Health, but denies access to any Health Events relating to EC2:
+You control access in AWS by creating policies and attaching them to IAM identities or AWS resources\. A policy is an object in AWS that, when associated with an identity or resource, defines their permissions\. AWS evaluates these policies when an entity \(root user, IAM user, or IAM role\) makes a request\. Permissions in the policies determine whether the request is allowed or denied\. Most policies are stored in AWS as JSON documents\. For more information about the structure and contents of JSON policy documents, see [Overview of JSON Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json) in the *IAM User Guide*\.
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "health:Describe*",
-            "Resource": "*"
-        },
-        {
-            "Effect": "Deny",
-            "Action": [
-                "health:DescribeAffectedEntities",
-                "health:DescribeEventDetails"
-            ],
-            "Resource": "*",
-            "Condition": {
-                "StringEquals": {
-                    "health:service": "EC2"
-                }
-            }
-        }
-    ]
-}
-```
+An IAM administrator can use policies to specify who has access to AWS resources, and what actions they can perform on those resources\. Every IAM entity \(user or role\) starts with no permissions\. In other words, by default, users can do nothing, not even change their own password\. To give a user permission to do something, an administrator must attach a permissions policy to a user\. Or the administrator can add the user to a group that has the intended permissions\. When an administrator gives permissions to a group, all users in that group are granted those permissions\.
 
-The following policy has the same effect, but makes use of the `Resource` element:
+IAM policies define permissions for an action regardless of the method that you use to perform the operation\. For example, suppose that you have a policy that allows the `iam:GetRole` action\. A user with that policy can get role information from the AWS Management Console, the AWS CLI, or the AWS API\.
 
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-  {
-    "Effect": "Allow",
-    "Action": [
-      "health:Describe*"
-    ],
-    "Resource": "*",
-  },
-  {
-    "Effect": "Deny",
-    "Action": [
-      "health:DescribeEventDetails",
-      "health:DescribeAffectedEntities"
-    ],
-    "Resource": "arn:aws:health:*::event/EC2/*/*",
-  }]
-}
-```
+### Identity\-based policies<a name="security_iam_access-manage-id-based-policies"></a>
 
-This policy statement grants access to Personal Health Dashboard and AWS Health, but denies access to any Health Events with type `AWS_EC2_*`:
+Identity\-based policies are JSON permissions policy documents that you can attach to an identity, such as an IAM user, role, or group\. These policies control what actions that identity can perform, on which resources, and under what conditions\. To learn how to create an identity\-based policy, see [Creating IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *IAM User Guide*\.
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "health:Describe*",
-            "Resource": "*"
-        },
-        {
-            "Effect": "Deny",
-            "Action": [
-                "health:DescribeAffectedEntities",
-                "health:DescribeEventDetails"
-            ],
-            "Resource": "*",
-            "Condition": {
-                "StringLike": {
-                    "health:eventTypeCode": "AWS_EC2_*"
-                }
-            }
-        }
-    ]
-}
-```
+Identity\-based policies can be further categorized as *inline policies* or *managed policies*\. Inline policies are embedded directly into a single user, group, or role\. Managed policies are standalone policies that you can attach to multiple users, groups, and roles in your AWS account\. Managed policies include AWS managed policies and customer managed policies\. To learn how to choose between a managed policy or an inline policy, see [Choosing Between Managed Policies and Inline Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#choosing-managed-or-inline) in the *IAM User Guide*\.
 
-**Important**  
-An **AccessDeniedException** is produced when a user attempts to access an event that is denied by the associated user, group, or role\. This applies only to [DescribeAffectedEntities](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html) and [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html)\.
+### Resource\-based policies<a name="security_iam_access-manage-resource-based-policies"></a>
+
+Resource\-based policies are JSON policy documents that you attach to a resource such as an Amazon S3 bucket\. Service administrators can use these policies to define what actions a specified principal \(account member, user, or role\) can perform on that resource and under what conditions\. Resource\-based policies are inline policies\. There are no managed resource\-based policies\.
+
+AWS Health supports resource\-based conditions\. You can specify which AWS Health events that users can view\. For example, you might create a policy that only allows an IAM user access to specific Amazon EC2 events in the Personal Health Dashboard\. 
+
+For more information, see [Resources](security_iam_service-with-iam.md#security_iam_service-with-iam-id-based-policies-resources)\.
+
+### Access control lists<a name="security_iam_access-manage-acl"></a>
+
+Access control lists \(ACLs\) are a type of policy that controls which principals \(account members, users, or roles\) have permissions to access a resource\. ACLs are similar to resource\-based policies, although they do not use the JSON policy document format\. Amazon S3, AWS WAF, and Amazon VPC are examples of services that support ACLs\. To learn more about ACLs, see [Access Control List \(ACL\) Overview](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) in the *Amazon Simple Storage Service Developer Guide*\.
+
+AWS Health doesn't support ACLs\.
+
+### Other policy types<a name="security_iam_access-manage-other-policies"></a>
+
+AWS supports additional, less\-common policy types\. These policy types can set the maximum permissions granted to you by the more common policy types\. 
++ **Permissions boundaries** – A permissions boundary is an advanced feature in which you set the maximum permissions that an identity\-based policy can grant to an IAM entity \(IAM user or role\)\. You can set a permissions boundary for an entity\. The resulting permissions are the intersection of entity's identity\-based policies and its permissions boundaries\. Resource\-based policies that specify the user or role in the `Principal` field are not limited by the permissions boundary\. An explicit deny in any of these policies overrides the allow\. For more information about permissions boundaries, see [Permissions Boundaries for IAM Entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) in the *IAM User Guide*\.
++ **Service control policies \(SCPs\)** – SCPs are JSON policies that specify the maximum permissions for an organization or organizational unit \(OU\) in AWS Organizations\. AWS Organizations is a service for grouping and centrally managing multiple AWS accounts that your business owns\. If you enable all features in an organization, then you can apply service control policies \(SCPs\) to any or all of your accounts\. The SCP limits permissions for entities in member accounts, including each AWS account root user\. For more information about Organizations and SCPs, see [How SCPs Work](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html) in the *AWS Organizations User Guide*\.
++ **Session policies** – Session policies are advanced policies that you pass as a parameter when you programmatically create a temporary session for a role or federated user\. The resulting session's permissions are the intersection of the user or role's identity\-based policies and the session policies\. Permissions can also come from a resource\-based policy\. An explicit deny in any of these policies overrides the allow\. For more information, see [Session Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session) in the *IAM User Guide*\. 
+
+### Multiple policy types<a name="security_iam_access-manage-multiple-policies"></a>
+
+When multiple types of policies apply to a request, the resulting permissions are more complicated to understand\. To learn how AWS determines whether to allow a request when multiple policy types are involved, see [Policy Evaluation Logic](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html) in the *IAM User Guide*\.

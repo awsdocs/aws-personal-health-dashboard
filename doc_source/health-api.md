@@ -15,7 +15,7 @@ AWS Health has a single global endpoint: https://health\.us\-east\-1\.amazonaws\
 
 You can view events in specific AWS Regions by using the filters supported by the API\. For more information about AWS endpoints and Regions for all services, see [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference*\.
 
-## Signing AWS Health API Requests<a name="signing"></a>
+## Signing AWS Health API requests<a name="signing"></a>
 
 Requests must be signed using an access key ID and a secret access key\. We strongly recommend that you do not use your AWS root account credentials for regular access to AWS Health\. You can use the credentials for an IAM user\.
 

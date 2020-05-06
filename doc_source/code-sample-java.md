@@ -1,8 +1,8 @@
-# Sample Java Code for the AWS Health API<a name="code-sample-java"></a>
+# Sample Java code for the AWS Health API<a name="code-sample-java"></a>
 
 The following Java code examples demonstrate how to initialize an AWS Health client and retrieve information about events and entities\.
 
-## Step 1: Initialize Credentials<a name="step-1"></a>
+## Step 1: Initialize credentials<a name="step-1"></a>
 
 Valid credentials are required to communicate with the AWS Health API\. You can use the key pair of any IAM user associated with the AWS account\.
 
@@ -20,7 +20,7 @@ throw new AmazonClientException(
 }
 ```
 
-## Step 2: Initialize an AWS Health API Client<a name="step-2"></a>
+## Step 2: Initialize an AWS Health API client<a name="step-2"></a>
 
 Use the initialized credentials object from the previous step to create an AWS Health client:
 
@@ -30,7 +30,7 @@ import com.amazonaws.services.health.AWSHealthClient;
 AWSHealth awsHealthClient = new AWSHealthClient(credentials);
 ```
 
-## Step 3: Use AWS Health API Operations to Get Event Information<a name="step-3"></a>
+## Step 3: Use AWS Health API operations to get event information<a name="step-3"></a>
 
 **DescribeEvents**
 

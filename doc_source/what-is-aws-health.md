@@ -1,4 +1,4 @@
-# What Is AWS Health?<a name="what-is-aws-health"></a>
+# What is AWS Health?<a name="what-is-aws-health"></a>
 
 AWS Health provides ongoing visibility into the state of your AWS resources, services, and accounts\. The service gives you awareness and remediation guidance for resource performance or availability issues that affect your applications running on AWS\. AWS Health provides relevant and timely information to help you manage events in progress\. AWS Health also helps to be aware of and to prepare for planned activities\. The service delivers alerts and notifications triggered by changes in the health of AWS resources, so that you get near\-instant event visibility and guidance to help accelerate troubleshooting\.
 
@@ -7,6 +7,6 @@ All customers can use the [Personal Health Dashboard](https://phd.aws.amazon.com
 Additionally, [AWS Support](https://aws.amazon.com/premiumsupport/) customers who have a Business or Enterprise support plan can use the AWS Health API to integrate with in\-house and third\-party systems\.
 
 **Topics**
-+ [Are You a First\-Time AWS Health User?](first-time-user.md)
-+ [Supported Operations in AWS Health](supported-operations.md)
++ [Are you a first\-time AWS Health user?](first-time-user.md)
++ [Supported operations in AWS Health](supported-operations.md)
 + [Accessing the AWS Health API](health-api.md)
