@@ -92,7 +92,7 @@ This example shows how you might create a policy that allows IAM users to view t
             "Action": [
                 "iam:GetUserPolicy",
                 "iam:ListGroupsForUser",
-                  "iam:ListAttachedUserPolicies",
+                "iam:ListAttachedUserPolicies",
                 "iam:ListUserPolicies",
                 "iam:GetUser"
             ],
@@ -192,7 +192,7 @@ This policy statement denies access to Personal Health Dashboard and the AWS Hea
 To understand the exact permissions needed for each APIs, see [Actions Defined by AWS Health APIs and Notifications](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awshealthapisandnotifications.html#awshealthapisandnotifications-actions-as-permissions) in the *IAM User Guide*\.
 
 **Note**  
-You must use credentials from the master AWS account for an organization to access the AWS Health APIs for AWS Organizations\. For more information, see [Aggregating AWS Health events across accounts with Organizational View](aggregate-events.md)\.
+You must use credentials from the master account for an organization to access the AWS Health APIs for AWS Organizations\. For more information, see [Aggregating AWS Health events across accounts with organizational view](aggregate-events.md)\.
 
 #### Allow AWS Health organizational API access<a name="allow-organizational-api-access"></a>
 

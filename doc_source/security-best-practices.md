@@ -24,4 +24,4 @@ You can integrate AWS Health with Amazon CloudWatch Events, so that you can crea
 
 In some cases, the Region for the AWS Health event can't be determined\. If that situation occurs, the event appears in the US East \(N\. Virginia\) Region by default\. You can set up CloudWatch Events in this Region to ensure that you monitor these events\. 
 
-For more information, see [Monitoring AWS Health events with Amazon CloudWatch Events](cloudwatch-events-health.md)\.
+For more information, see [Monitor for AWS Health events with Amazon CloudWatch Events](cloudwatch-events-health.md)\.

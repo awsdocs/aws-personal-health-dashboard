@@ -20,6 +20,12 @@ The role uses the following permissions policy to allow AWS Health to list accou
             "Effect": "Allow",
             "Action": "organizations:ListAccounts",
             "Resource": "*"
+        },
+        {
+            "Sid": "ListAWSServiceAccessForOrganization0",
+            "Effect": "Allow",
+            "Action": "organizations:ListAWSServiceAccessForOrganization",
+            "Resource": "*"
         }
     ]
 }

@@ -86,7 +86,7 @@ To see a list of AWS Health resource types and their ARNs, see [Resources Define
 
 ### Condition keys<a name="security_iam_service-with-iam-id-based-policies-conditionkeys"></a>
 
-The `Condition` element \(or `Condition` *block*\) lets you specify conditions in which a statement is in effect\. The `Condition` element is optional\. You can build conditional expressions that use [condition operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html), such as equals or less than, to match the condition in the policy with values in the request\. 
+The `Condition` element \(or `Condition` *block*\) lets you specify conditions in which a statement is in effect\. The `Condition` element is optional\. You can create conditional expressions that use [condition operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html), such as equals or less than, to match the condition in the policy with values in the request\. 
 
 If you specify multiple `Condition` elements in a statement, or multiple keys in a single `Condition` element, AWS evaluates them using a logical `AND` operation\. If you specify multiple values for a single condition key, AWS evaluates the condition using a logical `OR` operation\. All of the conditions must be met before the statement's permissions are granted\.
 
@@ -142,7 +142,7 @@ AWS Health supports service\-linked roles to integrate with AWS Organizations\. 
 
 You can use the [EnableHealthServiceAccessForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html) operation to create the service\-linked role in the account\. However, if you want to disable this feature, you must first call the [DisableHealthServiceAccessForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DisableHealthServiceAccessForOrganization.html) operation\. You can then delete the role through the IAM console, IAM API, or AWS Command Line Interface \(AWS CLI\)\. For more information, see [Using service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html) in the *IAM User Guide*\.
 
-For more information, see [Aggregating AWS Health events across accounts with Organizational View](aggregate-events.md)\.
+For more information, see [Aggregating AWS Health events across accounts with organizational view](aggregate-events.md)\.
 
 ### Service roles<a name="security_iam_service-with-iam-roles-service"></a>
 
