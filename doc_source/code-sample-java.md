@@ -45,7 +45,7 @@ DescribeEventsRequest request = new DescribeEventsRequest();
 EventFilter filter = new EventFilter();
 // Filter on any field from the supported AWS Health EventFilter model. 
 // Here is an example for Region us-east-1 events from the EC2 service.
-filter.setServices(singletonList("EC2");
+filter.setServices(singletonList("EC2"));
 filter.setRegions(singletonList("us-east-1"));
 request.setFilter(filter);
 
