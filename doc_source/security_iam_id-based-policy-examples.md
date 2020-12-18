@@ -14,21 +14,23 @@ To learn how to create an IAM identity\-based policy using these example JSON po
 ## Policy best practices<a name="security_iam_service-with-iam-policy-best-practices"></a>
 
 Identity\-based policies are very powerful\. They determine whether someone can create, access, or delete AWS Health resources in your account\. These actions can incur costs for your AWS account\. When you create or edit identity\-based policies, follow these guidelines and recommendations:
-+ **Get Started Using AWS Managed Policies** – To start using AWS Health quickly, use AWS managed policies to give your employees the permissions they need\. These policies are already available in your account and are maintained and updated by AWS\. For more information, see [Get Started Using Permissions With AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-use-aws-defined-policies) in the *IAM User Guide*\.
-+ **Grant Least Privilege** – When you create custom policies, grant only the permissions required to perform a task\. Start with a minimum set of permissions and grant additional permissions as necessary\. Doing so is more secure than starting with permissions that are too lenient and then trying to tighten them later\. For more information, see [Grant Least Privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) in the *IAM User Guide*\.
-+ **Enable MFA for Sensitive Operations** – For extra security, require IAM users to use multi\-factor authentication \(MFA\) to access sensitive resources or API operations\. For more information, see [Using Multi\-Factor Authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
-+ **Use Policy Conditions for Extra Security** – To the extent that it's practical, define the conditions under which your identity\-based policies allow access to a resource\. For example, you can write conditions to specify a range of allowable IP addresses that a request must come from\. You can also write conditions to allow requests only within a specified date or time range, or to require the use of SSL or MFA\. For more information, see [IAM JSON Policy Elements: Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) in the *IAM User Guide*\.
++ **Get started using AWS managed policies** – To start using AWS Health quickly, use AWS managed policies to give your employees the permissions they need\. These policies are already available in your account and are maintained and updated by AWS\. For more information, see [Get started using permissions with AWS managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#bp-use-aws-defined-policies) in the *IAM User Guide*\.
++ **Grant least privilege** – When you create custom policies, grant only the permissions required to perform a task\. Start with a minimum set of permissions and grant additional permissions as necessary\. Doing so is more secure than starting with permissions that are too lenient and then trying to tighten them later\. For more information, see [Grant least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) in the *IAM User Guide*\.
++ **Enable MFA for sensitive operations** – For extra security, require IAM users to use multi\-factor authentication \(MFA\) to access sensitive resources or API operations\. For more information, see [Using multi\-factor authentication \(MFA\) in AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) in the *IAM User Guide*\.
++ **Use policy conditions for extra security** – To the extent that it's practical, define the conditions under which your identity\-based policies allow access to a resource\. For example, you can write conditions to specify a range of allowable IP addresses that a request must come from\. You can also write conditions to allow requests only within a specified date or time range, or to require the use of SSL or MFA\. For more information, see [IAM JSON policy elements: Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) in the *IAM User Guide*\.
 
 ## Using the AWS Health console<a name="security_iam_id-based-policy-examples-console"></a>
 
 To access the AWS Health console, you must have a minimum set of permissions\. These permissions must allow you to list and view details about the AWS Health resources in your AWS account\. If you create an identity\-based policy that is more restrictive than the minimum required permissions, the console won't function as intended for entities \(IAM users or roles\) with that policy\.
 
-To ensure that those entities can still use the AWS Health console, you can attach the following AWS managed policy, [AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAcces)\.
+To ensure that those entities can still use the AWS Health console, you can attach the following AWS managed policy, [AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess)\.
 
-This policy grants an entity full access to the following: 
-+ Personal Health Dashboard in the AWS Management Console
+The AWSHealthFullAccess policy grants an entity full access to the following: 
++ Enable or disable the AWS Health organizational view feature for all accounts in an AWS organization
++ The Personal Health Dashboard in the AWS Health console
 + AWS Health API operations and notifications
-+ Access to enable or disable AWS Health for all accounts in an organization for AWS Organizations
++ View information about accounts that are part of your AWS organization
++ View the organizational units \(OU\) of the management account
 
 **Example : AWSHealthFullAccess**  
 
@@ -40,7 +42,7 @@ This policy grants an entity full access to the following:
             "Effect": "Allow",
             "Action": [
                 "organizations:EnableAWSServiceAccess",
-                "organizations:DisableAWSServiceAccess"
+                "organizations:DisableAWSServiceAccess"         
             ],
             "Resource": "*",
             "Condition": {
@@ -53,7 +55,10 @@ This policy grants an entity full access to the following:
             "Effect": "Allow",
             "Action": [
                 "health:*",
-                "organizations:ListAccounts"
+                "organizations:DescribeAccount",    
+                "organizations:ListAccounts",
+                "organizations:ListDelegatedAdministrators",
+                "organizations:ListParents"
             ],
             "Resource": "*"
         },
@@ -183,20 +188,25 @@ This policy statement denies access to Personal Health Dashboard and the AWS Hea
 
 ### Organizational view<a name="organizational-view"></a>
 
- If you enable organizational view for AWS Health, you must allow access to the AWS Health API operations for AWS Organizations\. The `Action` element of an IAM policy must include the following permissions:
+ If you want to enable organizational view for AWS Health, you must allow access to the AWS Health and AWS Organizations actions\. 
+
+The `Action` element of an IAM policy must include the following permissions:
 + `iam:CreateServiceLinkedRole`
 + `organizations:EnableAWSServiceAccess`
++ `organizations:DescribeAccount`
 + `organizations:DisableAWSServiceAccess`
 + `organizations:ListAccounts`
++ `organizations:ListDelegatedAdministrators`
++ `organizations:ListParents`
 
 To understand the exact permissions needed for each APIs, see [Actions Defined by AWS Health APIs and Notifications](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awshealthapisandnotifications.html#awshealthapisandnotifications-actions-as-permissions) in the *IAM User Guide*\.
 
 **Note**  
-You must use credentials from the master account for an organization to access the AWS Health APIs for AWS Organizations\. For more information, see [Aggregating AWS Health events across accounts with organizational view](aggregate-events.md)\.
+You must use credentials from the management account for an organization to access the AWS Health APIs for AWS Organizations\. For more information, see [Aggregating AWS Health events across accounts with organizational view](aggregate-events.md)\.
 
-#### Allow AWS Health organizational API access<a name="allow-organizational-api-access"></a>
+#### Allow access to AWS Health organizational view<a name="allow-organizational-api-access"></a>
 
-This policy statement grants access to all AWS Health organizational API operations\.
+This policy statement grants access to all AWS Health and AWS Organizations actions that you need for the organizational view feature\.
 
 **Example : Allow AWS Health organizational view access**  
 
@@ -221,7 +231,10 @@ This policy statement grants access to all AWS Health organizational API operati
             "Effect": "Allow",
             "Action": [
                 "health:*",
-                "organizations:ListAccounts"
+                "organizations:DescribeAccount",
+                "organizations:ListAccounts",
+                "organizations:ListDelegatedAdministrators",  
+                "organizations:ListParents"
             ],
             "Resource": "*"
         },
@@ -234,9 +247,9 @@ This policy statement grants access to all AWS Health organizational API operati
 }
 ```
 
-#### Deny AWS Health organizational API access<a name="deny-organizational-api-access"></a>
+#### Deny access to AWS Health organizational view<a name="deny-organizational-api-access"></a>
 
-This policy statement denies access to the AWS Organizations API operations, but allows access to the AWS Health API operations for an individual account\. 
+This policy statement denies access to the AWS Organizations actions but allows access to the AWS Health actions for an individual account\. 
 
 **Example : Deny AWS Health organizational view access**  
 
@@ -267,7 +280,10 @@ This policy statement denies access to the AWS Organizations API operations, but
         {
             "Effect": "Deny",
             "Action": [
-                "organizations:ListAccounts"
+                "organizations:DescribeAccount",
+                "organizations:ListAccounts",
+                "organizations:ListDelegatedAdministrators",
+                "organizations:ListParents"
             ],
             "Resource": "*"
         },

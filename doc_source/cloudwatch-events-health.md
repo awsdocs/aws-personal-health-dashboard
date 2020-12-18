@@ -13,13 +13,16 @@ For example, you can use a Lambda function to pass a notification to a Slack cha
 
 For samples of automation and customized alerts that you can create in response to AWS Health events, see the [AWS Health Tools](https://github.com/aws/aws-health-tools) in GitHub\.
 
-Only AWS Health events that are specific to your AWS account and resources are published to CloudWatch Events\. This includes events such as Amazon Elastic Block Store \(Amazon EBS\) volume lost, Amazon Elastic Compute Cloud \(Amazon EC2\) instance store drive performance degraded, and all the scheduled change events\. 
+**Note**  
+Only AWS Health events that are specific to your AWS account are published to CloudWatch Events\. For example, this can include events such as an Amazon Elastic Block Store \(Amazon EBS\) volume lost, Amazon Elastic Compute Cloud \(Amazon EC2\) instance store drive performance degraded, and other scheduled change events that might affect your account and resources\.   
+Currently, you can't use CloudWatch Events to return events from the [Service Health Dashboard](https://status.aws.amazon.com)\. Events from the Service Health Dashboard provide public information about the regional availability of a service\. These events aren't specific to AWS accounts, so they aren't published to CloudWatch Events\.  
+Instead, you can use the AWS Health console and the [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) API\. You can use either option to return information about an event, and then identify if it's a public event from the Service Health Dashboard or an account\-specific event that affects your account\.
 
-In contrast, [Service Health Dashboard](https://status.aws.amazon.com) events provide public information about the regional availability of a service\. These events aren't specific to AWS accounts, so they aren't published to CloudWatch Events\.
-
-Use the following options to identify if an event is public or account\-specific:
-+ In the Personal Health Dashboard, choose the **Affected resources** tab on the **Event log** page\. Events with resources are specific to your account\. Events without resources are public and are not specific to your account\. 
+You can use the following options to identify if an event is public or account\-specific:
++ In the Personal Health Dashboard, choose the **Affected resources** tab on the **Event log** page\. Events with resources are specific to your account\. Events without resources are public and are not specific to your account\. For more information, see [Getting started with the AWS Personal Health Dashboard](getting-started-phd.md)\.
 + Use the AWS Health API to return the `eventScopeCode` parameter\. Events can have the `PUBLIC`, `ACCOUNT_SPECIFIC`, or `NONE` value\. For more information, see the [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) operation in the *AWS Health API Reference*\. 
+
+You can also use the AWS Health Service Health Dashboard notifier tool to get notified for public events\. For more information, see the [aws\-health\-tools](https://github.com/aws/aws-health-tools/tree/master/shd-notifier) on the GitHub website\. 
 
 **Important**  
 Events that appear in the Personal Health Dashboard are Region\-specific\. For example, if AWS Health sends an event that affects a resource \(such as an Amazon EC2 instance\) in the US East \(Ohio\) Region, you must configure CloudWatch Events in the same Region to get notified of that event\.

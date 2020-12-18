@@ -35,7 +35,7 @@ The [DescribeEventAggregates](https://docs.aws.amazon.com/health/latest/APIRefer
 [DescribeAffectedEntitiesForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html) returns a list of entities that have been affected by one or more events for one or more accounts in your organization, based on the filter criteria\. 
 
 **EnableHealthServiceAccessForOrganization**  
-[EnableHealthServiceAccessForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html) operation grants the AWS Health service permission to interact with AWS Organizations on the customer’s behalf and applies a Service Linked Role to the master account in your organization\. 
+[EnableHealthServiceAccessForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html) operation grants the AWS Health service permission to interact with AWS Organizations on the customer’s behalf and applies a Service Linked Role to the management account in your organization\. 
 
 **DisableHealthServiceAccessForOrganization**  
 [DisableHealthServiceAccessForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DisableHealthServiceAccessForOrganization.html) operation revokes permission for the AWS Health service to interact with AWS Organizations on the customer's behalf\.

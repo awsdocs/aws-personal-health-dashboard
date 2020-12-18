@@ -8,5 +8,3 @@ Additionally, [AWS Support](https://aws.amazon.com/premiumsupport/) customers wh
 
 **Topics**
 + [Are you a first\-time AWS Health user?](first-time-user.md)
-+ [Supported operations in AWS Health](supported-operations.md)
-+ [Accessing the AWS Health API](health-api.md)
