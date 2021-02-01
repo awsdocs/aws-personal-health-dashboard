@@ -301,13 +301,18 @@ If the user or group that you want to give permissions to already has an IAM pol
 
 ## Resource\- and action\-based conditions<a name="resource-action-based-conditions"></a>
 
-AWS Health supports [IAM conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) for the [ DescribeAffectedEntities](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html) and [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) API operations\. This lets you restrict events that the AWS Health API sends to a user, group, or role\. 
+AWS Health supports [IAM conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) for the [ DescribeAffectedEntities](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html) and [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) API operations\. You can use resource\- and action\-based conditions to restrict events that the AWS Health API sends to a user, group, or role\. 
 
 To do so, update the `Condition` block of the IAM policy or set the `Resource` element\. You can use [String Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String) to restrict access based on certain AWS Health event fields\. 
 
-AWS Health supports the following fields:
+You can use the following fields when you specify an AWS Health event in your policy:
 + `eventTypeCode`
 + `service`
+
+**Notes**  
+The [ DescribeAffectedEntities](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html) and [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) API operations support resource\-level permissions\. For example, you can create a policy to allow or deny specific AWS Health events\.
+The [ DescribeAffectedEntitiesForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html) and [DescribeEventDetailsForOrganization](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html) API operations don't support resource\-level permissions\.
+For more information, see [Actions, resources, and condition keys for AWS Health APIs and Notifications](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awshealthapisandnotifications.html) in the *Service Authorization Reference*\.
 
 **Example : Action\-based condition**  
 This policy statement grants access to Personal Health Dashboard and the AWS Health `Describe*` API operations, but denies access to any AWS Health events that relate to Amazon EC2\.  

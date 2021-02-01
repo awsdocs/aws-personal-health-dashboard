@@ -4,9 +4,10 @@ By default, you can use AWS Health to view the AWS Health events of a single AWS
 
 You can aggregate events to identify accounts in your organization that are affected by an operational event or get notified for security vulnerabilities\. You can then use this information to proactively manage and automate resource maintenance events across your organization\. Use this feature to stay informed of upcoming changes to AWS services that might require updates or code changes\. 
 
-**Notes**  
+**Important**  
+AWS Health doesn't record events that occurred in your organization before you enabled organizational view\. For example, if a member account \(111122223333\) in your organization received an event for Amazon Elastic Compute Cloud \(Amazon EC2\) before you enabled this feature, this event won't appear in your organizational view\.
+AWS Health events that were sent for accounts in your organization will appear in organizational view as long as the event is available, up to 90 days, even if one or more of those accounts leave your organization\.
 Organizational events are available for 90 days before they're deleted\. This quota can't be increased\.
-AWS Health doesn't record events that occurred in your organization before you enabled organizational view\. For example, if a member account \(111122223333\) in your organization received an event for Amazon Elastic Compute Cloud \(Amazon EC2\) before you enabled this feature, this event won't appear in your organizational view\. 
 
 ## Prerequisites<a name="prerequisites-organizational-view"></a>
 

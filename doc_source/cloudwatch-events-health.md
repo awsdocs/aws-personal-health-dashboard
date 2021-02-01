@@ -1,6 +1,10 @@
 # Monitor for AWS Health events with Amazon CloudWatch Events<a name="cloudwatch-events-health"></a>
 
-You can use Amazon CloudWatch Events to detect and react to changes for AWS Health events\. Then, based on the rules that you create, CloudWatch Events invokes one or more target actions when an event matches the values that you specify in a rule\. Depending on the type of event, you can send notifications, capture event information, take corrective action, initiate events, or take other actions\. 
+You can use Amazon CloudWatch Events to detect and react to changes for AWS Health events\. Then, based on the rules that you create, CloudWatch Events invokes one or more target actions when an event matches the values that you specify in a rule\. Depending on the type of event, you can send notifications, capture event information, take corrective action, initiate events, or take other actions\. For example, you can use AWS Health to receive email notifications if you have AWS resources in your AWS account that are scheduled for updates, such as Amazon Elastic Compute Cloud \(Amazon EC2\) instances\.
+
+**Notes**  
+This topic uses the CloudWatch Events console to create a rule\. You can also use the Amazon EventBridge console to create a rule\. For more information, see [Creating a rule for an AWS service](https://docs.aws.amazon.com/eventbridge/latest/userguide/create-eventbridge-rule.html) in the *Amazon EventBridge User Guide*\.
+For both services, AWS Health delivers events on a best effort basis\. Events are not always guaranteed to be delivered to CloudWatch Events or EventBridge\.
 
 You can choose the following types of targets when using CloudWatch Events as a part of your AWS Health workflow:
 + AWS Lambda functions
@@ -13,23 +17,31 @@ For example, you can use a Lambda function to pass a notification to a Slack cha
 
 For samples of automation and customized alerts that you can create in response to AWS Health events, see the [AWS Health Tools](https://github.com/aws/aws-health-tools) in GitHub\.
 
-**Note**  
-Only AWS Health events that are specific to your AWS account are published to CloudWatch Events\. For example, this can include events such as an Amazon Elastic Block Store \(Amazon EBS\) volume lost, Amazon Elastic Compute Cloud \(Amazon EC2\) instance store drive performance degraded, and other scheduled change events that might affect your account and resources\.   
-Currently, you can't use CloudWatch Events to return events from the [Service Health Dashboard](https://status.aws.amazon.com)\. Events from the Service Health Dashboard provide public information about the regional availability of a service\. These events aren't specific to AWS accounts, so they aren't published to CloudWatch Events\.  
-Instead, you can use the AWS Health console and the [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) API\. You can use either option to return information about an event, and then identify if it's a public event from the Service Health Dashboard or an account\-specific event that affects your account\.
+**Topics**
++ [About AWS Regions for AWS Health](#choosing-a-region)
++ [About public events for AWS Health](#about-public-events)
++ [Creating a CloudWatch Events rule for AWS Health](#creating-cloudwatch-events-rule-for-aws-health)
++ [Automating actions for EC2 instances](#automating-instance-actions)
+
+## About AWS Regions for AWS Health<a name="choosing-a-region"></a>
+
+You must create a CloudWatch Events rule for each Region that you want to receive AWS Health events\. If you don’t create a rule, you won’t receive events\. For example, to receive events from the US West \(Oregon\) Region, you must create a rule for this Region\.
+
+Some AWS Health events are not Region\-specific and instead are global, such as events sent for AWS Identity and Access Management \(IAM\)\. To receive global events, you must create a rule for the US East \(N\. Virginia\) Region\.
+
+## About public events for AWS Health<a name="about-public-events"></a>
+
+Only AWS Health events that are specific to your AWS account are delivered to CloudWatch Events\. For example, this can include events such as a required update to an Amazon EC2 instance and other scheduled change events that might affect your account and resources\. 
+
+Currently, you can't use CloudWatch Events to return *public* events from the [Service Health Dashboard](https://status.aws.amazon.com)\. Events from the Service Health Dashboard provide public information about the regional availability of a service\. These events aren't specific to AWS accounts, so they aren't delivered to CloudWatch Events\.
+
+Instead, you can use the AWS Health console and the [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) operation\. You can use either option to return information about an event, and then identify if it's a public event from the Service Health Dashboard or an account\-specific event that affects your account\.
 
 You can use the following options to identify if an event is public or account\-specific:
 + In the Personal Health Dashboard, choose the **Affected resources** tab on the **Event log** page\. Events with resources are specific to your account\. Events without resources are public and are not specific to your account\. For more information, see [Getting started with the AWS Personal Health Dashboard](getting-started-phd.md)\.
 + Use the AWS Health API to return the `eventScopeCode` parameter\. Events can have the `PUBLIC`, `ACCOUNT_SPECIFIC`, or `NONE` value\. For more information, see the [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) operation in the *AWS Health API Reference*\. 
 
 You can also use the AWS Health Service Health Dashboard notifier tool to get notified for public events\. For more information, see the [aws\-health\-tools](https://github.com/aws/aws-health-tools/tree/master/shd-notifier) on the GitHub website\. 
-
-**Important**  
-Events that appear in the Personal Health Dashboard are Region\-specific\. For example, if AWS Health sends an event that affects a resource \(such as an Amazon EC2 instance\) in the US East \(Ohio\) Region, you must configure CloudWatch Events in the same Region to get notified of that event\.
-
-**Topics**
-+ [Creating a CloudWatch Events rule for AWS Health](#creating-cloudwatch-events-rule-for-aws-health)
-+ [Automating actions for EC2 instances](#automating-instance-actions)
 
 ## Creating a CloudWatch Events rule for AWS Health<a name="creating-cloudwatch-events-rule-for-aws-health"></a>
 
