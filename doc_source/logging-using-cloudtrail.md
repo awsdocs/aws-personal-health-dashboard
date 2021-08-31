@@ -45,8 +45,8 @@ The following example shows a CloudTrail log entry that demonstrates the [Descri
    "userIdentity": {
       "type": "IAMUser",
       "principalId": "AIDACKCEVSQ6C2EXAMPLE",
-      "arn": "arn:aws:iam::111122223333:user/JaneDoe",
-      "accountId": "111122223333",
+      "arn": "arn:aws:iam::123456789012:user/JaneDoe",
+      "accountId": "123456789012",
       "accessKeyId": "AKIAIOSFODNN7EXAMPLE",
       "userName": "JaneDoe",
       "sessionContext": {"attributes": {
@@ -66,7 +66,7 @@ The following example shows a CloudTrail log entry that demonstrates the [Descri
    "requestID": "05b299bc-afb9-11e6-8ef4-c34387f40bd4",
    "eventID": "e4deb9dc-dbc2-4bdb-8515-73e8abcbc29b",
    "eventType": "AwsApiCall",
-   "recipientAccountId": "111122223333"
+   "recipientAccountId": "123456789012"
    }
    ],
    ...

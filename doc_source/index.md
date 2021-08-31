@@ -1,7 +1,7 @@
 # AWS Health User Guide
 
 -----
-*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -15,7 +15,8 @@ Amazon's trademarks and trade dress may not be used in
 -----
 ## Contents
 + [What is AWS Health?](what-is-aws-health.md)
-   + [Are you a first-time AWS Health user?](first-time-user.md)
++ [Are you a first-time AWS Health user?](first-time-user.md)
++ [Concepts for AWS Health](aws-health-concepts-and-terms.md)
 + [Getting started with the AWS Personal Health Dashboard](getting-started-phd.md)
 + [Accessing the AWS Health API](health-api.md)
    + [Supported operations in AWS Health](supported-operations.md)
@@ -38,7 +39,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Aggregating AWS Health events across accounts with organizational view](aggregate-events.md)
    + [Organizational view (console)](enable-organizational-view-in-health-console.md)
    + [Organizational view (CLI)](enable-organizational-view-from-aws-command-line.md)
-+ [Monitor for AWS Health events with Amazon CloudWatch Events](cloudwatch-events-health.md)
++ [Monitoring AWS Health events with Amazon CloudWatch Events](cloudwatch-events-health.md)
 + [Monitoring AWS Health](monitoring-logging-health-events.md)
    + [Logging AWS Health API calls with AWS CloudTrail](logging-using-cloudtrail.md)
 + [Document history for AWS Health](doc-history.md)

@@ -16,7 +16,7 @@ Before you use organizational view, you must:
 + Sign in to the management account as an AWS Identity and Access Management \(IAM\) user or assume an IAM role\.
 
   You can also sign in as the root user \(not recommended\) in your organization's management account\. For more information, see [Lock away your AWS account root user access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#lock-away-credentials) in the *IAM User Guide*\.
-+ If you sign in as an IAM user, use an IAM policy that grants access to the AWS Health and Organizations actions, such as the [AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess) policy\. For more information, see [AWS Health identity\-based policy examples](security_iam_id-based-policy-examples.md)\. 
++ If you sign in as an IAM user, use an IAM policy that grants access to the AWS Health and Organizations actions, such as the [https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess) policy\. For more information, see [AWS Health identity\-based policy examples](security_iam_id-based-policy-examples.md)\. 
 
 **Topics**
 + [Organizational view \(console\)](enable-organizational-view-in-health-console.md)

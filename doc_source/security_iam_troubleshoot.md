@@ -13,7 +13,7 @@ Use the following information to diagnose and fix common issues that you might e
 
 If the AWS Management Console tells you that you're not authorized to perform an action, then you must contact your administrator for assistance\. Your administrator is the person that provided you with your user name and password\.
 
-The `AccessDeniedException` error appears when a user doesn't have permission to use Personal Health Dashboard or the AWS Health API operations\.
+The `AccessDeniedException` error appears when a user doesn't have permission to use AWS Personal Health Dashboard or the AWS Health API operations\.
 
 In this case, the user's administrator must update the policy to allow the user access\.
 

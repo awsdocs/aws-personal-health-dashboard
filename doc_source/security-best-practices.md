@@ -4,13 +4,13 @@ See the following best practices for working with AWS Health\.
 
 ## Grant AWS Health users minimum possible permissions<a name="minimum-permissions"></a>
 
-Follow the principle of least privilege by using the minimum set of access policy permissions for your users and groups\. For example, you might allow an AWS Identity and Access Management \(IAM\) user access to the Personal Health Dashboard\. However, you might not allow that same user to enable or disable access to AWS Organizations\.
+Follow the principle of least privilege by using the minimum set of access policy permissions for your users and groups\. For example, you might allow an AWS Identity and Access Management \(IAM\) user access to the AWS Personal Health Dashboard\. However, you might not allow that same user to enable or disable access to AWS Organizations\.
 
 For more information, see [AWS Health identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
 
-## View the Personal Health Dashboard<a name="view-health-events"></a>
+## View the AWS Personal Health Dashboard<a name="view-health-events"></a>
 
-Check your Personal Health Dashboard often to identify events that might affect your account or applications\. For example, you might receive an event notification about your resources, such as an Amazon Elastic Compute Cloud \(Amazon EC2\) instance that needs to be updated\. 
+Check your AWS Personal Health Dashboard often to identify events that might affect your account or applications\. For example, you might receive an event notification about your resources, such as an Amazon Elastic Compute Cloud \(Amazon EC2\) instance that needs to be updated\. 
 
 For more information, see [Getting started with the AWS Personal Health Dashboard](getting-started-phd.md)\.
 
@@ -24,4 +24,4 @@ You can integrate AWS Health with Amazon CloudWatch Events, so that you can crea
 
 In some cases, the Region for the AWS Health event can't be determined\. If that situation occurs, the event appears in the US East \(N\. Virginia\) Region by default\. You can set up CloudWatch Events in this Region to ensure that you monitor these events\. 
 
-For more information, see [Monitor for AWS Health events with Amazon CloudWatch Events](cloudwatch-events-health.md)\.
+For more information, see [Monitoring AWS Health events with Amazon CloudWatch Events](cloudwatch-events-health.md)\.

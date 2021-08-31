@@ -8,7 +8,7 @@ To learn how to create an IAM identity\-based policy using these example JSON po
 + [Policy best practices](#security_iam_service-with-iam-policy-best-practices)
 + [Using the AWS Health console](#security_iam_id-based-policy-examples-console)
 + [Allow users to view their own permissions](#security_iam_id-based-policy-examples-view-own-permissions)
-+ [Accessing the Personal Health Dashboard and the AWS Health API](#security_iam_id-based-policy-examples-access-dashboard)
++ [Accessing the AWS Personal Health Dashboard and the AWS Health API](#security_iam_id-based-policy-examples-access-dashboard)
 + [Resource\- and action\-based conditions](#resource-action-based-conditions)
 
 ## Policy best practices<a name="security_iam_service-with-iam-policy-best-practices"></a>
@@ -23,11 +23,11 @@ Identity\-based policies are very powerful\. They determine whether someone can 
 
 To access the AWS Health console, you must have a minimum set of permissions\. These permissions must allow you to list and view details about the AWS Health resources in your AWS account\. If you create an identity\-based policy that is more restrictive than the minimum required permissions, the console won't function as intended for entities \(IAM users or roles\) with that policy\.
 
-To ensure that those entities can still use the AWS Health console, you can attach the following AWS managed policy, [AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess)\.
+To ensure that those entities can still use the AWS Health console, you can attach the following AWS managed policy, [https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess)\.
 
-The AWSHealthFullAccess policy grants an entity full access to the following: 
+The `AWSHealthFullAccess` policy grants an entity full access to the following: 
 + Enable or disable the AWS Health organizational view feature for all accounts in an AWS organization
-+ The Personal Health Dashboard in the AWS Health console
++ The AWS Personal Health Dashboard in the AWS Health console
 + AWS Health API operations and notifications
 + View information about accounts that are part of your AWS organization
 + View the organizational units \(OU\) of the management account
@@ -122,19 +122,19 @@ This example shows how you might create a policy that allows IAM users to view t
 }
 ```
 
-## Accessing the Personal Health Dashboard and the AWS Health API<a name="security_iam_id-based-policy-examples-access-dashboard"></a>
+## Accessing the AWS Personal Health Dashboard and the AWS Health API<a name="security_iam_id-based-policy-examples-access-dashboard"></a>
 
-The Personal Health Dashboard is available for all AWS accounts\. The AWS Health API is available only to accounts with a Business or Enterprise support plan\. For more information, see [AWS Support](https://aws.amazon.com/premiumsupport/)\.
+The AWS Personal Health Dashboard is available for all AWS accounts\. The AWS Health API is available only to accounts with a Business or Enterprise support plan\. For more information, see [AWS Support](https://aws.amazon.com/premiumsupport/)\.
 
-You can use IAM to create entities \(users, groups, or roles\), and then give those entities permissions to access the Personal Health Dashboard and the AWS Health API\.
+You can use IAM to create entities \(users, groups, or roles\), and then give those entities permissions to access the AWS Personal Health Dashboard and the AWS Health API\.
 
-By default, IAM users don't have access to the Personal Health Dashboard or the AWS Health API\. You give users access to your account's AWS Health information by attaching IAM policies to a single user, a group of users, or a role\. For more information, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) and [Overview of IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html)\.
+By default, IAM users don't have access to the AWS Personal Health Dashboard or the AWS Health API\. You give users access to your account's AWS Health information by attaching IAM policies to a single user, a group of users, or a role\. For more information, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) and [Overview of IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html)\.
 
 After you create IAM users, you can give those users individual passwords\. Then, they can sign in to your account and view AWS Health information by using an account\-specific sign\-in page\. For more information, see [How Users Sign In to Your Account](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_how-users-sign-in.html)\.
 
 **Note**  
-An IAM user with permissions to view Personal Health Dashboard has read\-only access to health information across all AWS services on the account, which can include, but is not limited to, AWS resource IDs such as Amazon EC2 instance IDs, EC2 instance IP addresses, and general security notifications\.   
-For example, if an IAM policy grants access only to Personal Health Dashboard and the AWS Health API, then the user or role that the policy applies to can access all information posted about AWS services and related resources, even if other IAM policies don't allow that access\.
+An IAM user with permissions to view AWS Personal Health Dashboard has read\-only access to health information across all AWS services on the account, which can include, but is not limited to, AWS resource IDs such as Amazon EC2 instance IDs, EC2 instance IP addresses, and general security notifications\.   
+For example, if an IAM policy grants access only to AWS Personal Health Dashboard and the AWS Health API, then the user or role that the policy applies to can access all information posted about AWS services and related resources, even if other IAM policies don't allow that access\.
 
 You can use two groups of APIs for AWS Health\.
 + Individual accounts – You can use the operations such as [DescribeEvents](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html) and [DescribeEventDetails](https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html) to get information about AWS Health events for your account\. 
@@ -144,11 +144,11 @@ For more information about the available API operations, see the [AWS Health API
 
 ### Individual actions<a name="individual-account-health-api-actions"></a>
 
-You can set the `Action` element of an IAM policy to `health:Describe*`\. This allows access to the Personal Health Dashboard and AWS Health\. AWS Health supports access control to events based on the `eventTypeCode` and service\.
+You can set the `Action` element of an IAM policy to `health:Describe*`\. This allows access to the AWS Personal Health Dashboard and AWS Health\. AWS Health supports access control to events based on the `eventTypeCode` and service\.
 
 #### Describe access<a name="allow-describe-access-example"></a>
 
-This policy statement grants access to Personal Health Dashboard and any of the `Describe*` AWS Health API operations\. For example, an IAM user with this policy can access the Personal Health Dashboard in the AWS Management Console and call the AWS Health `DescribeEvents` API operation\.
+This policy statement grants access to AWS Personal Health Dashboard and any of the `Describe*` AWS Health API operations\. For example, an IAM user with this policy can access the AWS Personal Health Dashboard in the AWS Management Console and call the AWS Health `DescribeEvents` API operation\.
 
 **Example : Describe access**  
 
@@ -168,7 +168,7 @@ This policy statement grants access to Personal Health Dashboard and any of the 
 
 #### Deny access<a name="deny-access-example"></a>
 
-This policy statement denies access to Personal Health Dashboard and the AWS Health API\. An IAM user with this policy can't view the Personal Health Dashboard in the AWS Management Console and can't call any of the AWS Health API operations\.
+This policy statement denies access to AWS Personal Health Dashboard and the AWS Health API\. An IAM user with this policy can't view the AWS Personal Health Dashboard in the AWS Management Console and can't call any of the AWS Health API operations\.
 
 **Example : Deny access**  
 
@@ -315,7 +315,7 @@ The [ DescribeAffectedEntitiesForOrganization](https://docs.aws.amazon.com/healt
 For more information, see [Actions, resources, and condition keys for AWS Health APIs and Notifications](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awshealthapisandnotifications.html) in the *Service Authorization Reference*\.
 
 **Example : Action\-based condition**  
-This policy statement grants access to Personal Health Dashboard and the AWS Health `Describe*` API operations, but denies access to any AWS Health events that relate to Amazon EC2\.  
+This policy statement grants access to AWS Personal Health Dashboard and the AWS Health `Describe*` API operations, but denies access to any AWS Health events that relate to Amazon EC2\.  
 
 ```
 {
@@ -355,7 +355,7 @@ The following policy has the same effect, but uses the `Resource` element instea
     "Action": [
       "health:Describe*"
     ],
-    "Resource": "*",
+    "Resource": "*"
   },
   {
     "Effect": "Deny",
@@ -363,13 +363,13 @@ The following policy has the same effect, but uses the `Resource` element instea
       "health:DescribeEventDetails",
       "health:DescribeAffectedEntities"
     ],
-    "Resource": "arn:aws:health:*::event/EC2/*/*",
+    "Resource": "arn:aws:health:*::event/EC2/*/*"
   }]
 }
 ```
 
 **Example : eventTypeCode condition**  
-This policy statement grants access to Personal Health Dashboard and the AWS Health `Describe*` API operations, but denies access to any AWS Health events with the `eventTypeCode` that matches `AWS_EC2_*`\.  
+This policy statement grants access to AWS Personal Health Dashboard and the AWS Health `Describe*` API operations, but denies access to any AWS Health events with the `eventTypeCode` that matches `AWS_EC2_*`\.  
 
 ```
 {

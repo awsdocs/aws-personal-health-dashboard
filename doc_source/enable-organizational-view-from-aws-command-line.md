@@ -3,7 +3,7 @@
 You can also enable the organizational view feature from the AWS Command Line Interface \(AWS CLI\) instead of the AWS Health console\. To use the console, see [Enabling organizational view \(console\)](enable-organizational-view-in-health-console.md#enable-organizational-view-console)\.
 
 **Note**  
-If you want to allow users access to the management account for the organizational view feature, they must have permissions such as the [AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess) policy\. For more information, see [AWS Health identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
+If you want to allow users access to the management account for the organizational view feature, they must have permissions such as the [https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess) policy\. For more information, see [AWS Health identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
 
 **Topics**
 + [Enabling organizational view \(CLI\)](#enable-organizational-view)
@@ -96,7 +96,7 @@ public class EnableHealthServiceAccessDemo {
 }
 ```
 
-For more information, see the [AWS SDK for Java 2\.0 Developer Guide](https://docs.aws.amazon.com/sdk-for-java/v2/developer-guide/)\.
+For more information, see the [AWS SDK for Java 2\.0 Developer Guide](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/)\.
 
 ------
 
@@ -107,10 +107,21 @@ Enabling this feature is an asynchronous process and takes time to complete\. Yo
 
 ## Viewing organizational view events \(CLI\)<a name="viewing-organizational-view-events"></a>
 
-After you enable this feature, AWS Health starts to record events that affect accounts in the organization\. When an account joins your organization, AWS Health automatically adds the account to organizational view\. When an account leaves your organization, new events from that account are no longer logged to organizational view\. However, existing events remain and you can still query them up to the 90\-day limit\.
+After you enable this feature, AWS Health starts to record events that affect accounts in the organization\. When an account joins your organization, AWS Health automatically adds the account to organizational view\. 
 
 **Note**  
 AWS Health doesn't record events that occurred in your organization before you enabled organizational view\.
+
+When an account leaves your organization, new events from that account are no longer logged to organizational view\. However, existing events remain and you can still query them up to the 90\-day limit\.
+
+ AWS retains the policy data for the account for 90 days from the effective date of the administrator account closure\. At the end of the 90 day period, AWS permanently deletes all policy data for the account\. 
++  To retain findings for more than 90 days, you can archive the policies\. You can also use a custom action with an EventBridge rule to store the findings in an S3 bucket\. 
++  As long as AWS retains the policy data, when you reopen the closed account, AWS reassigns the account as the service administrator and recovers the service policy data for the account\. 
++  For more information, see [Closing an account](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html)\. 
+
+**Important**  
+ For customers in the AWS GovCloud \(US\) Regions:   
+ Before closing your account, back up and then delete your policy data and other account resources\. You will no longer have access to them after you close the account\. 
 
 You can use the AWS Health API operations to return events from organizational view\.
 

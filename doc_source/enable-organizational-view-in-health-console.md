@@ -5,7 +5,7 @@ You can use the AWS Health console to get a centralized view for health events i
 Organizational view is available in the AWS Health console for all AWS Support plans at no additional cost\.
 
 **Note**  
-If you want to allow users access to this feature in the management account, they must have permissions such as the [AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess) policy\. For more information, see [AWS Health identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
+If you want to allow users access to this feature in the management account, they must have permissions such as the [https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess](https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/AWSHealthFullAccess) policy\. For more information, see [AWS Health identity\-based policy examples](security_iam_id-based-policy-examples.md)\.
 
 **Contents**
 + [Enabling organizational view \(console\)](#enable-organizational-view-console)
@@ -19,9 +19,9 @@ If you want to allow users access to this feature in the management account, the
 
 You can enable organizational view from the AWS Health console\. You must sign in to the management account of your AWS organization\.
 
-**To view the Personal Health Dashboard for your organization**
+**To view the AWS Personal Health Dashboard for your organization**
 
-1. Sign in to the AWS Management Console and open the Personal Health Dashboard at [https://phd.aws.amazon.com/phd/home](https://phd.aws.amazon.com/phd/home)\. 
+1. Sign in to the AWS Management Console and open the AWS Personal Health Dashboard at [https://phd.aws.amazon.com/phd/home](https://phd.aws.amazon.com/phd/home)\. 
 
 1. In the navigation pane, choose **Organizational view**, and then choose **Configurations**\.
 
@@ -43,6 +43,15 @@ After you enable organizational view, AWS Health displays health events for all 
 
 When an account joins your organization, AWS Health automatically adds the account to organizational view\. When an account leaves your organization, new events from that account are no longer logged to organizational view\. However, existing events remain and you can still query them up to the 90\-day limit\. 
 
+ AWS retains the policy data for the account for 90 days from the effective date of the administrator account closure\. At the end of the 90 day period, AWS permanently deletes all policy data for the account\. 
++  To retain findings for more than 90 days, you can archive the policies\. You can also use a custom action with an EventBridge rule to store the findings in an S3 bucket\. 
++  As long as AWS retains the policy data, when you reopen the closed account, AWS reassigns the account as the service administrator and recovers the service policy data for the account\. 
++  For more information, see [Closing an account](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/close-account.html)\. 
+
+**Important**  
+ For customers in the AWS GovCloud \(US\) Regions:   
+ Before closing your account, back up and then delete your policy data and other account resources\. You will no longer have access to them after you close the account\. 
+
 **Note**  
 When you enable this feature, the AWS Health console can display public events from the [Service Health Dashboard](https://status.aws.amazon.com) for the last 7 days\. These public events aren't specific to accounts in your organization\. Events from the Service Health Dashboard provide public information about the regional availability of AWS services\.
 
@@ -58,7 +67,7 @@ You can use the **Dashboard** page to view events that might affect your AWS inf
 
 **To view organizational view events in the Dashboard page**
 
-1. Sign in to the AWS Management Console and open the Personal Health Dashboard at [https://phd.aws.amazon.com/phd/home](https://phd.aws.amazon.com/phd/home)\. 
+1. Sign in to the AWS Management Console and open the AWS Personal Health Dashboard at [https://phd.aws.amazon.com/phd/home](https://phd.aws.amazon.com/phd/home)\. 
 
 1. In the navigation pane, choose **Organizational view**, and then choose **Dashboard** to view recent and upcoming events\.
 
@@ -85,7 +94,7 @@ You can also use the **Event log** page to view AWS Health events for organizati
 
 **To view organizational view events in the Event log page**
 
-1. Sign in to the AWS Management Console and open the Personal Health Dashboard at [https://phd.aws.amazon.com/phd/home](https://phd.aws.amazon.com/phd/home)\. 
+1. Sign in to the AWS Management Console and open the AWS Personal Health Dashboard at [https://phd.aws.amazon.com/phd/home](https://phd.aws.amazon.com/phd/home)\. 
 
 1. In the navigation pane, choose **Organizational view**, and then choose **Event log**\.
 
@@ -141,7 +150,7 @@ AWS Health stops aggregating events for all other accounts in your organization\
 
 **To disable organizational view**
 
-1. Sign in to the AWS Management Console and open the Personal Health Dashboard at [https://phd.aws.amazon.com/phd/home](https://phd.aws.amazon.com/phd/home)\. 
+1. Sign in to the AWS Management Console and open the AWS Personal Health Dashboard at [https://phd.aws.amazon.com/phd/home](https://phd.aws.amazon.com/phd/home)\. 
 
 1. In the navigation pane, choose **Organizational view**, and then choose **Configurations**\.
 
